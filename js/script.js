@@ -45,16 +45,23 @@ const products = [
     category: "Bottoms",
     color: "Green"
   }
-  // Add more products as needed
 ];
 
 // Cart array to store product IDs
 let cart = [];
 
+// Update the cart count in the nav
+function updateCartCount() {
+  const countSpan = document.getElementById('cartCount');
+  if (countSpan) {
+    countSpan.textContent = cart.length;
+  }
+}
+
 // Render products on the Shop page
 function renderShopProducts() {
   const shopGrid = document.getElementById('shopGrid');
-  if (!shopGrid) return; // Only run on shop.html
+  if (!shopGrid) return;
 
   shopGrid.innerHTML = '';
   products.forEach(product => {
@@ -77,6 +84,7 @@ function renderShopProducts() {
       const prodId = parseInt(this.getAttribute('data-id'));
       if (!cart.includes(prodId)) {
         cart.push(prodId);
+        updateCartCount();
         this.textContent = "Added!";
         this.disabled = true;
         setTimeout(() => {
@@ -93,7 +101,6 @@ function renderGalleryProducts() {
   const galleryGrid = document.getElementById('galleryGrid');
   if (!galleryGrid) return;
 
-  // Get filter and sort values
   const categorySelect = document.getElementById('categoryFilter');
   const sortSelect = document.getElementById('sortPrice');
 
@@ -132,7 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderShopProducts();
   renderGalleryProducts();
 
-  // Add filter/sort event listeners if on gallery page
+  updateCartCount();
+
   const categorySelect = document.getElementById('categoryFilter');
   const sortSelect = document.getElementById('sortPrice');
   if (categorySelect && sortSelect) {
