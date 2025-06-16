@@ -425,3 +425,23 @@ body {
 .simple-product {
   background: white !important;
 }
+
+.announcement-banner {
+  background: linear-gradient(90deg, #f2f1ec 60%, #fff4c1 100%);
+  color: #181616;
+  text-align: center;
+  padding: 0.8rem 0 0.7rem 0;
+  font-size: 1.17rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.09em;
+  border-bottom: 1.5px solid #e2c487;
+  box-shadow: 0 1px 10px 0 rgba(200,160,100,0.06);
+  position: relative;
+  z-index: 1001;
+}
+
+.announcement-banner strong {
+  color: #b8543c;
+  font-size: 1.22em;
+  letter-spacing: 0.12em;
+}
