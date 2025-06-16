@@ -2,39 +2,39 @@
 const products = [
   {
     id: 1,
-    name: "Classic 80s Denim Jacket",
-    price: 49.99,
-    description: "Original Levi’s denim jacket, gently faded, size M.",
-    image: "https://placehold.co/290x360?text=Denim+Jacket",
-    category: "Jackets",
-    color: "Blue"
+    name: "Arc'teryx Vintage Beanie",
+    price: 30.99,
+    description: "Rare Arc'teryx shell, excellent condition. Size L.",
+    image: "img/arcteryx.jpg",
+    category: "hat",
+    color: "Black"
   },
   {
     id: 2,
-    name: "Retro Floral Dress",
-    price: 39.99,
-    description: "1970s floral midi dress with belt, size S.",
-    image: "https://placehold.co/290x360?text=Floral+Dress",
-    category: "Dresses",
-    color: "Multicolor"
-  },
-  {
-    id: 3,
-    name: "Vintage Leather Boots",
-    price: 59.99,
-    description: "Brown leather boots, European size 39, excellent condition.",
-    image: "https://placehold.co/290x360?text=Leather+Boots",
-    category: "Shoes",
+    name: "Carhartt Workwear Jacket",
+    price: 84.99,
+    description: "Classic Carhartt duck canvas, rugged & ready. Size XL.",
+    image: "img/carhartt.jpg",
+    category: "Jackets",
     color: "Brown"
   },
   {
-    id: 4,
-    name: "Striped Polo Shirt",
-    price: 24.99,
-    description: "Classic 90s striped polo, size L, cotton.",
-    image: "https://placehold.co/290x360?text=Polo+Shirt",
+    id: 3,
+    name: "1977 Unisex Sweatshirt",
+    price: 42.99,
+    description: "Vintage Champion crewneck sweatshirt, soft & warm. Size M.",
+    image: "img/sweatshirt.jpg",
     category: "Tops",
-    color: "Red/White"
+    color: "Grey"
+  },
+  {
+    id: 4,
+  name: "Arc'teryx Vintage Jacket",
+  price: 119.99,
+  description: "Rare Arc'teryx shell, light green, excellent condition. Size L.",
+  image: "img/arcteryxj.jpg",
+  category: "Jackets",
+  color: "Light Green"
   },
   {
     id: 5,
