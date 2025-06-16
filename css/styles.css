@@ -11,7 +11,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-  color: #7e5835; /* signature brown for headings */
+  color: #7e5835;
   margin-top: 0;
 }
 
@@ -63,17 +63,6 @@ nav a:hover, nav a:focus {
   color: #7e5835;
   border-bottom: 2px solid #af895a;
 }
-@media (max-width: 700px) {
-  nav ul {
-    flex-direction: column;
-    gap: 1.2rem;
-    margin-top: 0.7rem;
-  }
-  header h1 {
-    font-size: 1.5rem;
-  }
-}
-
 
 main {
   min-height: 70vh;
@@ -84,7 +73,7 @@ footer {
   background: #fff7eb;
   border-top: 1px solid #efede7;
   color: #9c8e7a;
-  font-size: 16px;
+  font-size: 15px;
   text-align: center;
   margin-top: 3rem;
   padding: 2rem 0 1rem 0;
@@ -93,16 +82,6 @@ footer {
   box-shadow: 0 -1px 10px 0 rgba(200,160,100,0.03);
 }
 
-@media (max-width: 700px) {
-  footer {
-    font-size: 13px;
-    padding: 1rem 0 0.7rem 0;
-    margin-top: 2rem;
-  }
-}
-
-
-/* Utility class for main sections */
 .section {
   max-width: 1100px;
   margin: 0 auto;
@@ -119,6 +98,7 @@ footer {
   padding: 0 1rem;
 }
 
+/* Product Card Styles & Animations */
 .product-card {
   background: #fff;
   border: 1px solid #efede7;
@@ -132,8 +112,8 @@ footer {
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 20px 0 rgba(140, 90, 40, 0.14);
-  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 24px 0 rgba(140, 90, 40, 0.18);
+  transform: translateY(-7px) scale(1.04);
 }
 
 .product-card img {
@@ -154,6 +134,7 @@ footer {
   color: #7e5835;
 }
 
+/* Add-to-Cart Button Styles & Animation */
 .product-card button {
   background: #af895a;
   color: #fff;
@@ -163,11 +144,73 @@ footer {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.22s, box-shadow 0.18s;
+  transition: background 0.22s, box-shadow 0.18s, transform 0.15s;
   margin-top: 0.7rem;
 }
 
-.product-card button:hover {
+.product-card button:hover,
+.product-card button:focus {
   background: #7e5835;
   box-shadow: 0 2px 10px 0 rgba(140, 90, 40, 0.12);
+  transform: scale(1.07);
+}
+
+/* Contact Form Styles */
+form input,
+form textarea {
+  font-family: 'Montserrat', Arial, sans-serif;
+  border: 1px solid #c8a15c;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: #fff;
+  color: #2a2a2a;
+  transition: border 0.18s;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border: 1.5px solid #7e5835;
+  background: #fffdf8;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .section, .product-grid {
+    max-width: 95vw;
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  nav ul {
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 0.7rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+  footer {
+    font-size: 13px;
+    padding: 1rem 0 0.7rem 0;
+    margin-top: 2rem;
+  }
+  .product-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section, .product-grid {
+    padding: 0.5rem;
+  }
+  .product-card h3 {
+    font-size: 1rem;
+  }
+  .product-card p {
+    font-size: 0.98rem;
+  }
 }
