@@ -1,22 +1,23 @@
-/* Import Google Fonts for a VINTAGE look */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento:wght@400;700&display=swap');
 
+/* Body and Typography */
 body {
   margin: 0;
-  font-family: 'Quattrocento', serif;  
+  font-family: 'Quattrocento', serif;
   background: linear-gradient(135deg, #f9f5f0 70%, #f3e7ce 100%);
   color: #3c2f2f;
   letter-spacing: 0.02em;
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
   color: #7e5835;
   margin-top: 0;
-  letter-spacing: 0.01em;
 }
 
+/* Header & Navigation */
 header {
   background: rgba(255,247,235,0.88);
   color: #7e5835;
@@ -47,7 +48,6 @@ header span {
   letter-spacing: 0.06em;
 }
 
-/* Navigation */
 nav ul {
   display: flex;
   justify-content: center;
@@ -73,7 +73,6 @@ nav a:hover, nav a:focus, nav a.active {
   border-bottom: 2px solid #af895a;
 }
 
-/* Main Section Layout */
 main {
   min-height: 70vh;
   padding: 2.4rem 1.2rem 1rem 1.2rem;
@@ -193,7 +192,7 @@ main {
 /* Contact Form Styles */
 form input,
 form textarea {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: 'Quattrocento', serif;
   border: 1px solid #c8a15c;
   border-radius: 7px;
   padding: 0.7rem 1rem;
@@ -229,18 +228,41 @@ form textarea:focus {
   color: #4b9657 !important;
 }
 
-/* Footer */
+/* --- BLACK VINTAGE FOOTER --- */
 footer {
-  background: #fff7eb;
-  border-top: 1px solid #efede7;
-  color: #9c8e7a;
-  font-size: 15px;
+  background: #181616;
+  border-top: 1px solid #2b2a2a;
+  color: #ede0cf;
+  font-size: 16px;
   text-align: center;
   margin-top: 3rem;
-  padding: 2rem 0 1rem 0;
-  letter-spacing: 0.04em;
-  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-  box-shadow: 0 -1px 10px 0 rgba(200,160,100,0.03);
+  padding: 2rem 0 1.3rem 0;
+  letter-spacing: 0.07em;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 -1px 12px 0 rgba(44, 38, 33, 0.19);
+  position: relative;
+}
+
+/* Optional: Golden accent line */
+footer::before {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #e2c487 0%, #ede0cf 100%);
+  margin: 0 auto 1rem auto;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+footer a {
+  color: #e2c487;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+footer a:hover,
+footer a:focus {
+  color: #fff7e0;
 }
 
 /* Responsive Styles */
