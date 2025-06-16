@@ -148,3 +148,48 @@ document.addEventListener('DOMContentLoaded', () => {
     sortSelect.addEventListener('change', renderGalleryProducts);
   }
 });
+
+ // Contact Form Validation
+function validateContactForm(event) {
+  event.preventDefault();
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
+  const formMessage = document.getElementById("formMessage");
+
+  // Reset messages
+  formMessage.style.color = "#b8543c";
+  formMessage.textContent = "";
+
+  // Validation logic
+  if (!name.value.trim()) {
+    formMessage.textContent = "Please enter your name.";
+    name.focus();
+    return false;
+  }
+  if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
+    formMessage.textContent = "Please enter a valid email address.";
+    email.focus();
+    return false;
+  }
+  if (!message.value.trim()) {
+    formMessage.textContent = "Please enter your message.";
+    message.focus();
+    return false;
+  }
+  // Success!
+  formMessage.style.color = "#4b9657";
+  formMessage.textContent = "Thank you! Your message has been received.";
+  name.value = "";
+  email.value = "";
+  message.value = "";
+  return true;
+}
+
+// Only run on contact.html
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", validateContactForm);
+  }
+});
