@@ -214,3 +214,13 @@ form textarea:focus {
     font-size: 0.98rem;
   }
 }
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(25px) scale(0.98);}
+  to { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+.product-card {
+  /* keep previous styles... */
+  animation: fadeInCard 0.7s cubic-bezier(.16,.98,.59,.98);
+}
