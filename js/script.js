@@ -1,11 +1,11 @@
-// TVH Vintage Product Data
+// -------- PRODUCT DATA --------
 const products = [
   {
     id: 1,
     name: "Classic 80s Denim Jacket",
     price: 49.99,
     description: "Original Levi’s denim jacket, gently faded, size M.",
-    image: "img/denim-jacket.jpg",
+    image: "https://placehold.co/290x360?text=Denim+Jacket",
     category: "Jackets",
     color: "Blue"
   },
@@ -14,7 +14,7 @@ const products = [
     name: "Retro Floral Dress",
     price: 39.99,
     description: "1970s floral midi dress with belt, size S.",
-    image: "img/floral-dress.jpg",
+    image: "https://placehold.co/290x360?text=Floral+Dress",
     category: "Dresses",
     color: "Multicolor"
   },
@@ -23,7 +23,7 @@ const products = [
     name: "Vintage Leather Boots",
     price: 59.99,
     description: "Brown leather boots, European size 39, excellent condition.",
-    image: "img/leather-boots.jpg",
+    image: "https://placehold.co/290x360?text=Leather+Boots",
     category: "Shoes",
     color: "Brown"
   },
@@ -32,7 +32,7 @@ const products = [
     name: "Striped Polo Shirt",
     price: 24.99,
     description: "Classic 90s striped polo, size L, cotton.",
-    image: "img/polo-shirt.jpg",
+    image: "https://placehold.co/290x360?text=Polo+Shirt",
     category: "Tops",
     color: "Red/White"
   },
@@ -41,49 +41,57 @@ const products = [
     name: "Corduroy Skirt",
     price: 34.99,
     description: "Olive green corduroy skirt, 1980s, size M.",
-    image: "img/corduroy-skirt.jpg",
+    image: "https://placehold.co/290x360?text=Corduroy+Skirt",
     category: "Bottoms",
     color: "Green"
   }
 ];
 
-// Cart array to store product IDs
-let cart = [];
+// ----------- CART LOGIC -----------
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Update the cart count in the nav
-function updateCartCount() {
-  const countSpan = document.getElementById('cartCount');
-  if (countSpan) {
-    countSpan.textContent = cart.length;
-  }
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Render products on the Shop page
+function updateCartCount() {
+  const countSpans = document.querySelectorAll('#cartCount');
+  let count = cart.reduce((acc, item) => acc + item.qty, 0);
+  countSpans.forEach(span => span.textContent = count);
+}
+
+// -------- MINIMAL SHOP PAGE (Batavia style) -----------
 function renderShopProducts() {
   const shopGrid = document.getElementById('shopGrid');
   if (!shopGrid) return;
 
   shopGrid.innerHTML = '';
   products.forEach(product => {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" />
-      <h3>${product.name}</h3>
-      <p><strong>$${product.price.toFixed(2)}</strong></p>
-      <p>${product.description}</p>
-      <button data-id="${product.id}">Add to Cart</button>
+    const inCart = cart.find(item => item.id === product.id);
+    const div = document.createElement('div');
+    div.className = 'simple-product';
+    div.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" class="simple-product-img"/>
+      <div class="simple-product-details">
+        <div class="simple-product-name">${product.name}</div>
+        <div class="simple-product-price">$${product.price.toFixed(2)}</div>
+        <div class="simple-product-desc">${product.description}</div>
+        <button data-id="${product.id}" class="simple-cart-btn">
+          ${inCart ? "Added!" : "Add to Cart"}
+        </button>
+      </div>
     `;
-    shopGrid.appendChild(card);
+    shopGrid.appendChild(div);
   });
 
   // Add click event listeners for "Add to Cart" buttons
-  const cartButtons = shopGrid.querySelectorAll('button[data-id]');
-  cartButtons.forEach(btn => {
+  shopGrid.querySelectorAll('button[data-id]').forEach(btn => {
     btn.addEventListener('click', function() {
       const prodId = parseInt(this.getAttribute('data-id'));
-      if (!cart.includes(prodId)) {
-        cart.push(prodId);
+      let found = cart.find(item => item.id === prodId);
+      if (!found) {
+        cart.push({ id: prodId, qty: 1 });
+        saveCart();
         updateCartCount();
         this.textContent = "Added!";
         this.disabled = true;
@@ -96,100 +104,109 @@ function renderShopProducts() {
   });
 }
 
-// Render products on the Gallery page with filter and sort
-function renderGalleryProducts() {
-  const galleryGrid = document.getElementById('galleryGrid');
-  if (!galleryGrid) return;
+// ---------- CART PAGE DISPLAY -----------
+function renderCartPage() {
+  const cartItemsDiv = document.getElementById('cartItems');
+  const cartTotalDiv = document.getElementById('cartTotal');
+  const clearCartBtn = document.getElementById('clearCartBtn');
+  if (!cartItemsDiv) return;
 
-  const categorySelect = document.getElementById('categoryFilter');
-  const sortSelect = document.getElementById('sortPrice');
-
-  let filteredProducts = [...products];
-
-  // Filter
-  if (categorySelect && categorySelect.value !== 'All') {
-    filteredProducts = filteredProducts.filter(p => p.category === categorySelect.value);
+  if (cart.length === 0) {
+    cartItemsDiv.innerHTML = `<p style="color:#b8543c;font-size:1.09rem;">Your cart is empty.</p>`;
+    cartTotalDiv.textContent = "";
+    if (clearCartBtn) clearCartBtn.style.display = "none";
+    return;
   }
 
-  // Sort
-  if (sortSelect) {
-    if (sortSelect.value === 'asc') {
-      filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (sortSelect.value === 'desc') {
-      filteredProducts.sort((a, b) => b.price - a.price);
-    }
-  }
-
-  galleryGrid.innerHTML = '';
-  filteredProducts.forEach(product => {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" />
-      <h3>${product.name}</h3>
-      <p><strong>$${product.price.toFixed(2)}</strong></p>
-      <p>${product.description}</p>
+  cartItemsDiv.innerHTML = cart.map(item => {
+    let prod = products.find(p => p.id === item.id);
+    return `
+      <div class="simple-product" style="max-width:440px;margin:0 auto 2rem auto;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:1.3rem;">
+        <img src="${prod.image}" alt="${prod.name}" class="simple-product-img" style="max-width:80px;">
+        <div class="simple-product-details">
+          <div class="simple-product-name" style="font-size:1.12rem;margin:0;">${prod.name}</div>
+          <div style="font-size:1rem;margin:5px 0 10px 0;">
+            <span>Price: $${prod.price.toFixed(2)}</span>
+            <br>
+            <span>Quantity: ${item.qty}</span>
+          </div>
+          <button class="remove-from-cart-btn simple-cart-btn" data-id="${item.id}" style="background:#b8543c;margin-top:0;">Remove</button>
+        </div>
+      </div>
     `;
-    galleryGrid.appendChild(card);
+  }).join("");
+
+  let total = cart.reduce((sum, item) => {
+    let prod = products.find(p => p.id === item.id);
+    return sum + prod.price * item.qty;
+  }, 0);
+
+  cartTotalDiv.innerHTML = `<span style="color:#af895a;">Total: $${total.toFixed(2)}</span>`;
+  if (clearCartBtn) clearCartBtn.style.display = "inline-block";
+
+  // Remove item event
+  cartItemsDiv.querySelectorAll('.remove-from-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const id = parseInt(this.getAttribute('data-id'));
+      cart = cart.filter(item => item.id !== id);
+      saveCart();
+      updateCartCount();
+      renderCartPage();
+    });
+  });
+
+  // Clear Cart event
+  if (clearCartBtn) {
+    clearCartBtn.onclick = function() {
+      cart = [];
+      saveCart();
+      updateCartCount();
+      renderCartPage();
+    };
+  }
+}
+
+// ---------- CONTACT FORM VALIDATION (if on contact.html) -----------
+function setupContactForm() {
+  const contactForm = document.getElementById("contactForm");
+  if (!contactForm) return;
+  contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
+    const formMessage = document.getElementById("formMessage");
+    formMessage.style.color = "#b8543c";
+    formMessage.textContent = "";
+
+    if (!name.value.trim()) {
+      formMessage.textContent = "Please enter your name.";
+      name.focus();
+      return false;
+    }
+    if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
+      formMessage.textContent = "Please enter a valid email address.";
+      email.focus();
+      return false;
+    }
+    if (!message.value.trim()) {
+      formMessage.textContent = "Please enter your message.";
+      message.focus();
+      return false;
+    }
+    formMessage.style.color = "#4b9657";
+    formMessage.textContent = "Thank you! Your message has been received.";
+    name.value = "";
+    email.value = "";
+    message.value = "";
+    return true;
   });
 }
 
-// Main entry point after DOM loads
+// ---------- MAIN ENTRY POINT -----------
 document.addEventListener('DOMContentLoaded', () => {
   renderShopProducts();
-  renderGalleryProducts();
-
+  renderCartPage();
   updateCartCount();
-
-  const categorySelect = document.getElementById('categoryFilter');
-  const sortSelect = document.getElementById('sortPrice');
-  if (categorySelect && sortSelect) {
-    categorySelect.addEventListener('change', renderGalleryProducts);
-    sortSelect.addEventListener('change', renderGalleryProducts);
-  }
-});
-
- // Contact Form Validation
-function validateContactForm(event) {
-  event.preventDefault();
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const message = document.getElementById("message");
-  const formMessage = document.getElementById("formMessage");
-
-  // Reset messages
-  formMessage.style.color = "#b8543c";
-  formMessage.textContent = "";
-
-  // Validation logic
-  if (!name.value.trim()) {
-    formMessage.textContent = "Please enter your name.";
-    name.focus();
-    return false;
-  }
-  if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
-    formMessage.textContent = "Please enter a valid email address.";
-    email.focus();
-    return false;
-  }
-  if (!message.value.trim()) {
-    formMessage.textContent = "Please enter your message.";
-    message.focus();
-    return false;
-  }
-  // Success!
-  formMessage.style.color = "#4b9657";
-  formMessage.textContent = "Thank you! Your message has been received.";
-  name.value = "";
-  email.value = "";
-  message.value = "";
-  return true;
-}
-
-// Only run on contact.html
-document.addEventListener("DOMContentLoaded", () => {
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", validateContactForm);
-  }
+  setupContactForm();
 });
