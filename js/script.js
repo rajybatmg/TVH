@@ -70,3 +70,28 @@ function renderShopProducts() {
 
 // Run this function only after DOM is loaded
 document.addEventListener('DOMContentLoaded', renderShopProducts);
+
+// Render products on the Gallery page
+function renderGalleryProducts() {
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (!galleryGrid) return; // Only run on gallery.html
+
+  galleryGrid.innerHTML = '';
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p><strong>$${product.price.toFixed(2)}</strong></p>
+      <p>${product.description}</p>
+    `;
+    galleryGrid.appendChild(card);
+  });
+}
+
+// Run this function only after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  renderShopProducts();
+  renderGalleryProducts();
+});
