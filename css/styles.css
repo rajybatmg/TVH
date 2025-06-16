@@ -1,9 +1,9 @@
-/* Import Google Fonts for a modern, premium look */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:600,700&display=swap');
+/* Import Google Fonts for a VINTAGE look */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento:wght@400;700&display=swap');
 
 body {
   margin: 0;
-  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Quattrocento', serif;  
   background: linear-gradient(135deg, #f9f5f0 70%, #f3e7ce 100%);
   color: #3c2f2f;
   letter-spacing: 0.02em;
@@ -11,7 +11,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Cinzel', serif;
   color: #7e5835;
   margin-top: 0;
   letter-spacing: 0.01em;
