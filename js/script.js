@@ -47,3 +47,26 @@ const products = [
   }
   // Add more products as needed
 ];
+
+// Render products on the Shop page
+function renderShopProducts() {
+  const shopGrid = document.getElementById('shopGrid');
+  if (!shopGrid) return; // Only run on shop.html
+
+  shopGrid.innerHTML = ''; // Clear previous content
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p><strong>$${product.price.toFixed(2)}</strong></p>
+      <p>${product.description}</p>
+      <button>Add to Cart</button>
+    `;
+    shopGrid.appendChild(card);
+  });
+}
+
+// Run this function only after DOM is loaded
+document.addEventListener('DOMContentLoaded', renderShopProducts);
