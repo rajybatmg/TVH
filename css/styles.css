@@ -224,3 +224,23 @@ form textarea:focus {
   /* keep previous styles... */
   animation: fadeInCard 0.7s cubic-bezier(.16,.98,.59,.98);
 }
+
+#formMessage {
+  min-height: 1.2em;
+  font-size: 1.07rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s, opacity 0.3s;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.9;
+}
+
+#formMessage[style*="color: #b8543c"] {
+  color: #b8543c !important; /* Error (red-brown) */
+}
+
+#formMessage[style*="color: #4b9657"] {
+  color: #4b9657 !important; /* Success (green) */
+}
+
