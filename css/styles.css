@@ -1,15 +1,27 @@
+/* Import Google Fonts for a modern, premium look */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600,700&display=swap');
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #fcf6f0;
-  color: #2a2a2a;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  background: #f9f5f0; /* subtle beige */
+  color: #3c2f2f;      /* deep brown */
+  letter-spacing: 0.02em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  color: #7e5835; /* signature brown for headings */
+  margin-top: 0;
 }
 
 header {
-  background: #fff8ee;
-  border-bottom: 1px solid #e8e3dd;
+  background: #fff7eb; /* lighter beige */
+  color: #7e5835;
   padding: 1.2rem 0;
   text-align: center;
+  border-bottom: 1px solid #efede7;
+  box-shadow: 0 2px 6px rgba(200, 160, 100, 0.04);
 }
 
 nav ul {
@@ -23,16 +35,37 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #9d6b3e;
+  color: #af895a;
   font-weight: bold;
-  transition: color 0.2s;
+  transition: color 0.2s, border-bottom 0.2s;
+  font-size: 1.1rem;
+  padding-bottom: 3px;
 }
 
 nav a:hover {
-  color: #5a3919;
+  color: #7e5835;
+  border-bottom: 2px solid #af895a;
+  padding-bottom: 2px;
+}
+
+main {
+  min-height: 70vh;
+  padding: 2rem 1rem 1rem 1rem;
 }
 
 footer {
-  background: #fff8ee;
-  border-top: 1px solid #e8e3dd;
+  background: #fff7eb;
+  border-top: 1px solid #efede7;
+  color: #9c8e7a;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+/* Utility class for main sections */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
