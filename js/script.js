@@ -68,16 +68,33 @@ function renderShopProducts() {
   });
 }
 
-// Run this function only after DOM is loaded
-document.addEventListener('DOMContentLoaded', renderShopProducts);
-
 // Render products on the Gallery page
 function renderGalleryProducts() {
   const galleryGrid = document.getElementById('galleryGrid');
-  if (!galleryGrid) return; // Only run on gallery.html
+  if (!galleryGrid) return;
+
+  // Get filter and sort values
+  const categorySelect = document.getElementById('categoryFilter');
+  const sortSelect = document.getElementById('sortPrice');
+
+  let filteredProducts = [...products];
+
+  // Filter
+  if (categorySelect && categorySelect.value !== 'All') {
+    filteredProducts = filteredProducts.filter(p => p.category === categorySelect.value);
+  }
+
+  // Sort
+  if (sortSelect) {
+    if (sortSelect.value === 'asc') {
+      filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortSelect.value === 'desc') {
+      filteredProducts.sort((a, b) => b.price - a.price);
+    }
+  }
 
   galleryGrid.innerHTML = '';
-  products.forEach(product => {
+  filteredProducts.forEach(product => {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
@@ -90,8 +107,16 @@ function renderGalleryProducts() {
   });
 }
 
-// Run this function only after DOM is loaded
+// Single DOMContentLoaded block
 document.addEventListener('DOMContentLoaded', () => {
   renderShopProducts();
   renderGalleryProducts();
+
+  // Add filter/sort event listeners if on gallery page
+  const categorySelect = document.getElementById('categoryFilter');
+  const sortSelect = document.getElementById('sortPrice');
+  if (categorySelect && sortSelect) {
+    categorySelect.addEventListener('change', renderGalleryProducts);
+    sortSelect.addEventListener('change', renderGalleryProducts);
+  }
 });
