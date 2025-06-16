@@ -38,13 +38,32 @@ const products = [
   },
   {
     id: 5,
-    name: "Corduroy Skirt",
-    price: 34.99,
-    description: "Olive green corduroy skirt, 1980s, size M.",
-    image: "https://placehold.co/290x360?text=Corduroy+Skirt",
-    category: "Bottoms",
-    color: "Green"
-  }
+  name: "The North Face Winter Jacket",
+  price: 129.99,
+  description: "Authentic North Face puffer jacket, warm and lightweight. Size L.",
+  image: "img/northfacejacket.jpg",
+  category: "Jackets",
+  color: "Black"
+  },
+  {
+    id: 6,
+  name: "Salomon XT-6 Grey Shoes",
+  price: 99.99,
+  description: "Original Salomon XT-6, classic grey colorway, lightly worn. Size 270mm.",
+  image: "img/salomonshoes.jpg",
+  category: "Shoes",
+  color: "Grey"
+  },
+  {
+  id: 7,
+  name: "Nike Zipper Hoodie",
+  price: 54.99,
+  description: "Vintage Nike full-zip hoodie, brown color, XL size. Soft fleece lining.",
+  image: "img/nikezipperhoodie.jpg",
+  category: "Tops",
+  color: "Brown"
+}
+
 ];
 
 // ----------- CART LOGIC -----------
