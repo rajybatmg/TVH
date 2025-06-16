@@ -48,12 +48,15 @@ const products = [
   // Add more products as needed
 ];
 
+// Cart array to store product IDs
+let cart = [];
+
 // Render products on the Shop page
 function renderShopProducts() {
   const shopGrid = document.getElementById('shopGrid');
   if (!shopGrid) return; // Only run on shop.html
 
-  shopGrid.innerHTML = ''; // Clear previous content
+  shopGrid.innerHTML = '';
   products.forEach(product => {
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -62,13 +65,30 @@ function renderShopProducts() {
       <h3>${product.name}</h3>
       <p><strong>$${product.price.toFixed(2)}</strong></p>
       <p>${product.description}</p>
-      <button>Add to Cart</button>
+      <button data-id="${product.id}">Add to Cart</button>
     `;
     shopGrid.appendChild(card);
   });
+
+  // Add click event listeners for "Add to Cart" buttons
+  const cartButtons = shopGrid.querySelectorAll('button[data-id]');
+  cartButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const prodId = parseInt(this.getAttribute('data-id'));
+      if (!cart.includes(prodId)) {
+        cart.push(prodId);
+        this.textContent = "Added!";
+        this.disabled = true;
+        setTimeout(() => {
+          this.textContent = "Add to Cart";
+          this.disabled = false;
+        }, 1200);
+      }
+    });
+  });
 }
 
-// Render products on the Gallery page
+// Render products on the Gallery page with filter and sort
 function renderGalleryProducts() {
   const galleryGrid = document.getElementById('galleryGrid');
   if (!galleryGrid) return;
@@ -107,7 +127,7 @@ function renderGalleryProducts() {
   });
 }
 
-// Single DOMContentLoaded block
+// Main entry point after DOM loads
 document.addEventListener('DOMContentLoaded', () => {
   renderShopProducts();
   renderGalleryProducts();
